@@ -529,7 +529,7 @@ TEEC_Result TEEC_OpenSession(TEEC_Context *ctx, TEEC_Session *session,
 	}
 
 	rc = ioctl(ctx->fd, TEE_IOC_OPEN_SESSION, &buf_data);
-	if (rc) {
+	if (!arg->ret || rc) {
 		EMSG("TEE_IOC_OPEN_SESSION failed");
 		eorig = TEEC_ORIGIN_COMMS;
 		res = ioctl_errno_to_res(errno);
